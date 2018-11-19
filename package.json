@@ -1,0 +1,26 @@
+{
+  "name": "thietkegiaodien",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MacMinhHoang/ThietKeGiaoDien.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MacMinhHoang/ThietKeGiaoDien/issues"
+  },
+  "homepage": "https://github.com/MacMinhHoang/ThietKeGiaoDien#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "express-handlebars-sections": "^1.0.1",
+    "npm": "^6.4.1"
+  }
+}

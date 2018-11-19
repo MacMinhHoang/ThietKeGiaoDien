@@ -1,0 +1,17 @@
+.header {
+    background-color: cornflowerblue;
+    height: 100px;
+}
+
+.error-404 {
+    text-align: center;
+    font-size: x-large;
+}
+
+.error-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 400px;
+    width: auto;
+}
