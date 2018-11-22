@@ -8,6 +8,9 @@ var express = require('express'),
 var handle404MDW = require('./middle-wares/handle404');
 
 var homeController = require('./controllers/homeController');
+var HomePage = require('./controllers/HomePage');
+var Quiz = require('./controllers/Quiz');
+var PvP = require('./controllers/PvP');
 
 var app = express();
 
@@ -39,6 +42,24 @@ app.get('/', (req, res) => {
 });
 
 app.use('/home', homeController);
+
+app.get('/', (req, res) => {
+    res.redirect('/homePage');
+});
+
+app.use('/homePage', HomePage);
+
+app.get('/', (req, res) => {
+    res.redirect('/quiz');
+});
+
+app.use('/quiz', Quiz);
+
+app.get('/', (req, res) => {
+    res.redirect('/pvp');
+});
+
+app.use('/pvp', PvP);
 
 app.use(handle404MDW);
 
