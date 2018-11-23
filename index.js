@@ -2,12 +2,13 @@ var express = require('express'),
     exphbs = require('express-handlebars'),
     express_handlebars_sections = require('express-handlebars-sections'),
     bodyParser = require('body-parser'),
-    path = require('path');
+    path = require('path'),
+    session = require('express-session');
 //var wnumb = require('wnumb');
 
 var handle404MDW = require('./middle-wares/handle404');
 
-var homeController = require('./controllers/homeController');
+var startController = require('./controllers/startController');
 var HomePage = require('./controllers/HomePage');
 var Quiz = require('./controllers/Quiz');
 var PvP = require('./controllers/PvP');
@@ -37,27 +38,22 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-app.get('/', (req, res) => {
-    res.redirect('/home');
-});
-
-app.use('/home', homeController);
-
-app.get('/', (req, res) => {
-    res.redirect('/homePage');
-});
-
-app.use('/homePage', HomePage);
+app.use(session({
+    key: 'session_cookie_name',
+    secret: 'session_cookie_secret',
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.get('/', (req, res) => {
-    res.redirect('/quiz');
+    res.redirect('/start');
 });
+
+app.use('/start', startController);
+
+app.use('/home', HomePage);
 
 app.use('/quiz', Quiz);
-
-app.get('/', (req, res) => {
-    res.redirect('/pvp');
-});
 
 app.use('/pvp', PvP);
 

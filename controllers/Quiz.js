@@ -2,8 +2,13 @@ var express = require('express');
 
 var router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('Quiz');
+var restrict = require('../middle-wares/restrictUser');
+
+router.get('/', restrict, (req, res) => {
+    var vm = {
+        session: req.session
+    }
+    res.render('Quiz', vm);
 });
 
 module.exports = router;

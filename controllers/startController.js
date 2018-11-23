@@ -6,4 +6,9 @@ router.get('/', (req, res) => {
     res.render('index');
 });
 
+router.post('/', (req, res) => {
+    req.session.user = req.body.nickname;
+    res.redirect('/home')
+});
+
 module.exports = router;

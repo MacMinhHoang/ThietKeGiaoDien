@@ -1,86 +1,136 @@
 {{#section 'title'}}
-  HomePage
+  Home Page
 {{/section}}
 
 {{#section 'css'}}
-  <style>
-      h1{
-          margin-left: 450px;
-      }
-      h2{
-          margin-left: 180px;
-      }
-      h3{
-          margin-left: 180px;
-          color: crimson;
-          font-size: 25px;
-      }
-      h4{
-          margin-left: 180px;
-      }
-      h5{
-          margin-left: 180px;
-          color: crimson;
-          font-size: 25px;
-      }
-      h6{
-          margin-left: 180px;
-      }
-      h7{
-          margin-left: 350px;
-      }
-  </style>
+
 {{/section}}
 
 {{#section 'js'}}
-    <body>
-    <h1><img src="https://i.imgur.com/LyxiniE.png" weight="400" height="100"></h1>
-    <h2><img src="https://i.imgur.com/tcZ5ptW.png"></h2>
-    <h3>
-        1.Chọn lĩnh vực
-        <img src="https://i.imgur.com/sbkXzYD.png" usemap="#click"/>
-        <map name="click">
-            <area shape="rect" coords="0,0,180,90" href="homePage">
-        </map>
-        <img src="https://i.imgur.com/CPtcYFX.png" usemap="#click2"/>
-        <map name="click2">
-            <area shape="rect" coords="0,5,175,90" href="homePage">
-        </map>
-        <img src="https://i.imgur.com/R1GygjK.png" usemap="#click3"/>
-        <map name="click3">
-            <area shape="rect" coords="0,0,180,85" href="homePage">
-        </map>
-        <img src="https://i.imgur.com/NfSZ5st.png" usemap="#click4"/>
-        <map name="click4">
-            <area shape="rect" coords="0,0,180,90" href="homePage">
-        </map>
-    </h3>
-    <h4><img src="https://i.imgur.com/6erBViY.png"/></h4>
-    <h5>
-        2.Chọn độ khó
-        <img style="margin-left: 100px" src="https://i.imgur.com/Fh18NTc.png" usemap="#click5"/>
-        <map name="click5">
-            <area shape="rect" coords="5,5,180,90" href="homePage">
-        </map>
-        <img src="https://i.imgur.com/G2yZSLR.png" usemap="#click6"/>
-        <map name="click6">
-            <area shape="rect" coords="5,5,180,90" href="homePage">
-        </map>
-        <img src="https://i.imgur.com/x2Ap8Ru.png" usemap="#click7"/>
-        <map name="click7">
-            <area shape="rect" coords="0,0,175,90" href="homePage">
-        </map>
-    </h5>
-    <h6><img src="https://i.imgur.com/oN5XFKP.png"/></h6>
-    <h7>
-        <img src="https://i.imgur.com/VkH8Umk.png" usemap="#workmap"/>
-        <map name="workmap">
-            <area shape="rect" coords="0,0,300,300" href="/quiz">
-        </map>
-        <img style="margin-left: 50px" src="https://i.imgur.com/khp7M6F.png" usemap="#workmap1"/>
-        <map name="workmap1">
-            <area shape="rect" coords="0,0,300,300" href="/pvp">
-        </map>
-    </h7>
-    </body>
+    <script type="text/javascript">
+        function checkInput1() {
+            var check = false;
+            $('#field li').each(function() {
+                if($(this).hasClass('active'))
+                    check = true;
+                    return;
+            });
+            return check;
+        }
+
+        function checkInput2() {
+            var check = false;
+            $('#difficulty li').each(function() {
+                if($(this).hasClass('active'))
+                    check = true;
+                    return;
+            });
+            return check;
+        }
+
+        $('#pvp').on('click', function() {
+            var isActive = checkInput1() && checkInput2();
+            if (!isActive) {
+                swal({
+                    type: 'error',
+                    title: 'Lỗi',
+                    text: 'Bạn phải chọn cả lĩnh vực và độ khó!'                
+                });
+            }
+            else {
+                 swal({
+                    type: 'info',
+                    title: 'Đang tìm kiếm người chơi...',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then((result) => {
+                    $('#url').val('/pvp');
+                    $('#myForm').submit();
+                });
+            }
+           
+        });
+
+        $('#quiz').on('click', function() {
+            var isActive = checkInput1() && checkInput2();
+            if (!isActive) {
+                swal({
+                    type: 'error',
+                    title: 'Lỗi',
+                    text: 'Bạn phải chọn cả lĩnh vực và độ khó!'                
+                });
+            }
+            else {
+                let timerInterval;
+                swal({
+                    title: 'Chuẩn bị',
+                    html: '<strong></strong>.',
+                    timer: 2000,
+                    onOpen: () => {
+                        swal.showLoading()
+                        timerInterval = setInterval(() => {
+                        swal.getContent().querySelector('strong')
+                            .textContent = swal.getTimerLeft()
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    $('#url').val('/quiz');
+                    $('#myForm').submit();
+                });
+            }
+        });
+
+        $('ul#field li').on('click', function() {
+            $(this).parent().children().not(this).removeClass('active');
+            $(this).addClass('active');
+            var title = $(this).children('img').attr('title');
+            $('#inputField').val(title);
+        });
+
+        $('ul#difficulty li').on('click', function() {
+            $(this).parent().children().not(this).removeClass('active');
+            $(this).addClass('active');
+            var title = $(this).children('img').attr('title');
+            $('#inputDifficulty').val(title);
+        });
+    </script>
 {{/section}}
+<div class="menu">
+    <img src="https://i.imgur.com/tcZ5ptW.png">
+    <br><br> 
+    <div class="choice-block">
+        <ul class="fields" id="field">
+            <li><img src="https://i.imgur.com/sbkXzYD.png" title="Thể Thao"/></li>
+            <li><img src="https://i.imgur.com/CPtcYFX.png" title="Đời Sống"/></li>
+            <li><img src="https://i.imgur.com/R1GygjK.png" title="Lịch Sử"/></li>
+            <li><img src="https://i.imgur.com/NfSZ5st.png" title="Địa Lý"/></li>
+        </ul>
+    </div>
+    <br><br>
+    <img src="https://i.imgur.com/6erBViY.png"/>
+    <br><br>
+    <div class="choice-block">
+        <ul class="fields" id="difficulty">
+            <li><img src="https://i.imgur.com/Fh18NTc.png" title="Dễ"/></li>
+            <li><img src="https://i.imgur.com/G2yZSLR.png" title="Trung Bình"/></li>
+            <li><img src="https://i.imgur.com/x2Ap8Ru.png" title="Khó"/></li>
+        </ul>
+    </div>
+    <br><br>
+    <img src="https://i.imgur.com/oN5XFKP.png"/>
+    <br><br>
+    <div style="text-align:center">
+        <input type="image" src="https://i.imgur.com/VkH8Umk.png" id="quiz">
+        &nbsp&nbsp&nbsp&nbsp
+        <input type="image" src="https://i.imgur.com/khp7M6F.png" id="pvp">
+    </div>
+
+    <form id="myForm" method="POST">
+        <input type="hidden" id="inputField" name="inputField">
+        <input type="hidden" id="inputDifficulty" name="inputDifficulty">
+        <input type="hidden" id="url" name="url">
+    </form>
+</div>

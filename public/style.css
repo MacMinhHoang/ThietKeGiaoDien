@@ -1,7 +1,26 @@
-/*.header {
-     background-color: cornflowerblue;
-     height: 100px;
-}*/
+.swal2-popup {
+    font-size: 1.6rem !important;
+  }
+
+.page-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-logo:hover {
+    cursor: pointer;
+}
+
+.nickname-box {
+    border: 2px solid DodgerBlue;
+    border-width: 20px; 
+    border-radius: 20px;
+    height: 150px;
+    width: 300px;
+    padding: 12px 20px;
+    font-size: 20px;
+}
 
 .error-404 {
     text-align: center;
@@ -14,4 +33,40 @@
     margin-right: auto;
     height: 400px;
     width: auto;
+}
+
+.menu {
+    margin-left: 50px;
+}
+
+.choice-block {
+    font-size: 25px;
+    text-align: center;
+}
+
+ul.fields {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.fields li {
+    display: inline;
+    padding: 20px;
+}
+
+ul.fields li.active img {
+    ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    transform: scale(1.2); 
+    border: 2px solid DodgerBlue;
+    border-width: 5px; 
+    border-radius: 20px;
+}
+
+ul.fields li img:hover {
+    ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    transform: scale(1.2); 
+    cursor: pointer;
 }

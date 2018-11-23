@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="header">
-
+        <img class="page-logo" src="/images/Logos/UY_Logo2.png" id="logo">
     </div>
 
     <div class="container">
@@ -20,6 +20,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.1/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        $('#logo').on('click', function() {
+            window.location.href = "/home";
+        });
+    </script>
     {{{_sections.js}}}
 </body>
 </html>

@@ -3,33 +3,37 @@
 {{/section}}
 
 {{#section 'css'}}
-    <style>
-        h1{
-            margin-left: 450px;
-        }
-        h2{
-            margin-left: 450px;
-        }
-        h3{
-            margin-left: 300px;
-        }
-    </style>
+  
 {{/section}}
 
 {{#section 'js'}}
-    <body>
-    <h1><img src="https://i.imgur.com/LyxiniE.png" weight="400" height="100"></h1>
-    <h2>
-        <img src="https://i.imgur.com/U8v7L3t.png">
-        <textarea rows="4" cols="20" style="border:2px solid DodgerBlue;border-width: 20px; border-radius:20px"><Nhập Nick Name của bạn></textarea>
-    </h2>
-    <h3>
-        <img src="https://i.imgur.com/9jLRuPe.png" />
-        <img src="https://i.imgur.com/mXncjKT.png" usemap="#workmap"/>
-        <map name="workmap">
-            <area shape="rect" coords="0,0,300,300" href="/homePage">
-        </map>
-        <img src="https://i.imgur.com/7DArY2w.png"/>
-    </h3>
-    </body>
+    <script type="text/javascript">
+        function showMess() {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Chức năng này chưa được cài đặt'                
+            })
+        }
+    </script>
 {{/section}}
+
+<form method="POST">
+<div style="margin: auto; width: 50%;">
+    
+        <div>
+            <img src="/images/Logos/question-mark2.png" width="40%" height="40%" style="float:left">
+            <br>
+            <input type="text" class="form-control nickname-box" id="nickname" name="nickname" required
+                placeholder="Nhập Nickname của bạn">
+        </div>
+        <br>
+        &nbsp&nbsp<input type="image" alt="Submit" src="https://i.imgur.com/mXncjKT.png">
+</div>
+</form>
+<br><br>
+<div style="margin: auto; width: 50%; clear:both">
+    <input type="image" src="https://i.imgur.com/9jLRuPe.png" onclick="showMess()">
+    &nbsp&nbsp
+    <input type="image" src="https://i.imgur.com/7DArY2w.png" onclick="showMess()">
+</div>
