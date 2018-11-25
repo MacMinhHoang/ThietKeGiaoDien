@@ -8,8 +8,167 @@
 
 {{#section 'js'}}
 
+	<script type="text/javascript">
+
+		function displayNum(num, ele){
+			var hnum = parseInt(num/100)
+			var tnum = hnum>0?parseInt((num%100)/10):parseInt(num/10)
+			var unum = parseInt(num%10)
+
+			var hundred = "/images/Numbers/number" + hnum + ".png"
+			var ten = "/images/Numbers/number" + tnum + ".png"
+			var unit = "/images/Numbers/number" + unum + ".png"
+			if(hnum>0){
+				$(ele).html(`<img class="icon" src=${hundred}>`)
+				$(ele).append(`<img class="icon" src=${ten}>`)
+				$(ele).append(`<img class="icon" src=${unit}>`)
+			}else if(tnum>0){
+				$(ele).html(`<img class="icon" src=${ten}>`)
+				$(ele).append(`<img class="icon" src=${unit}>`)
+			} else {
+				$(ele).html('<img class="icon" src="/images/Numbers/number0.png">')
+				$(ele).append(`<img class="icon" src=${unit}>`)
+			}
+		}
+
+		let count = $('#time').val()?$('#time').val():60
+		let timer = setInterval(function() {
+
+		    displayNum(count--, '.countdown')
+		    if(count === 0) {
+		    	clearInterval(timer);
+			    	swal({
+                    type: 'warning',
+                    title: 'Hết thời gian',
+                    text: 'Lượt chơi của bạn đã kết thúc!'                
+                }).then((result) => {
+                    /*window.location = "/result";*/
+                });
+		    }
+		}, 1000);
+
+		if($('#score').val()){
+			displayNum($('#score').val(), '.scores')
+		} else {
+			$('.scores').html('<img class="icon" src="/images/Numbers/number0.png">')
+		}
+
+		if($('#right').val()){
+			displayNum($('#right').val(), '.right')
+		} else {
+			$('.right').html('<img class="icon" src="/images/Numbers/number0.png">')
+		}
+
+		if($('#wrong').val()){
+			displayNum($('#wrong').val(), '.wrong')
+		} else {
+			$('.wrong').html('<img class="icon" src="/images/Numbers/number0.png">')
+		}
+
+		const final = $('#chosen').val()
+
+		if(final){
+			if($('#result').val() && $('#result').val() === final){
+				$('#' + final).siblings('button').css('background-color', "rgb(57, 255, 30)")
+			} else if($('#result').val() === 'false'){
+				$('#' + final).siblings('button').css('background-color', "red")
+			}
+		}
+
+	 	$('.choice').click(function(){
+			/*const id = $('#result').val()
+	 		$('#' + id).siblings('button').css('background-color', "rgb(57, 255, 30)")
+	 		$('#' + id).children('img').attr('src', '/images/Icons/correct.png')
+		 	$('#' + id).children('img').show()
+
+	 		if($(this).data('id')!==parseInt(id)){
+	 			$(this).children('button').css('background-color', "red")
+	 			$(this).children('.col-sm-1').children('img').attr('src', '/images/Numbers/number2.png')
+		 		$(this).children('.col-sm-1').children('img').show()
+			}
+			$('.choice').children('button').prop("disabled", true);*/
+			
+			clearInterval(timer);
+			const chosen = $(this).data('id')
+			$('#chosen').val(chosen);
+			$('#time').val(count);
+			$('#myForm').submit()
+		})
+	</script>
 {{/section}}
 
-{{session.field}}
 <br>
-{{session.difficulty}}
+<form id="myForm" method="POST">
+	<input type="hidden" value="{{id}}" id="seqOfQuestion" name="id">
+	<input type="hidden" value="{{session.time}}" id="time" name="time">
+	<input type="hidden" value="{{session.score}}" id="score" name="score">
+	<input type="hidden" value="{{session.right}}" id="right" name="right">
+	<input type="hidden" value="{{session.wrong}}" id="wrong" name="wrong">
+	<input type="hidden" value="{{session.chosen}}" id="chosen" name="chosen">
+</form>
+<input type="hidden" value="{{session.isRight}}" id="result">
+
+<div class="row">
+    <div class="col-sm-4" style="border-left: transparent;">
+    	<img class="icon" src="/images/Icons/smile.png" title="Trả lời đúng">
+    	<div class="right">
+    		<img class="icon tens" src="/images/Numbers/number1.png" style="display:none" />
+    		<img class="icon units" src="/images/Numbers/number1.png" style="display:none" />
+    	</div>
+    </div>
+    <div class="col-sm-4">
+    	<img class="icon" src="/images/Icons/scores.png" title="Điểm hiện tại">
+    	<div class="scores">
+    	</div>
+    </div>
+    <div class="col-sm-4">
+    	<img class="icon" src="/images/Icons/sad.png" title="Trả lời sai">
+    	<div class="wrong"></div>
+    </div>
+</div>
+
+<div class="row row-eq-height">
+    <div class="col-sm-4" id="center">
+    	<div class="col-sm-6 text-right">
+    		<img class="icon" src="/images/Icons/time.png" title="Đếm ngược">
+    		<br />
+    		<div class="row">Lĩnh vực:</div>
+    		<div class="row">Độ khó:</div>
+    	</div>
+    	<div class="col-sm-6 text-left">
+    		<div class="countdown">
+
+    		</div>
+    		
+    		<div class="row">{{session.field}}</div>
+    		<div class="row">{{session.difficulty}}</div>
+    	</div>
+    </div>
+    <div class="col-sm-8">
+    	<div class="row">
+    		<div class="col-sm-1">
+	    		<img class="icon" src="/images/Logos/question-mark2.png" title="Câu hỏi">
+	    	</div>
+	    	<div class="col-sm-10">
+	    		<div id="question">{{question}}</div>
+	    	</div>
+    	</div>
+    	
+    	<div class="row">
+    		<div class="col-sm-1"></div>
+    		<div class="col-sm-11">
+    		{{#each options}}
+	    		<div class="choice" data-id="{{id}}">
+	    			<button class="col-sm-11">
+		    			<img class="icon" src="/images/Logos/question-mark2.png" title="">
+		    			<span>{{content}}</span>
+		    		</button>
+		    		<div class="col-sm-1" id="{{id}}">
+			    		<img class="marked" src="" style="display:none" />
+			    	</div>
+	    		</div>
+	    	{{/each}}
+	    	</div>
+    	</div>
+    </div>
+</div>
