@@ -1,0 +1,98 @@
+.row {
+    border-style: solid;
+}
+
+.col-lg-4 {
+    border-left: solid;
+    text-align: center;
+    padding: 10px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+}
+
+.col-lg-6 img{
+    margin-right: -20px;
+    width: 80px;
+    height: 80px;
+}
+
+.col-lg-6 .row {
+    margin-top: 10px;
+    border-style: none;
+}
+
+.row.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#center {
+    margin: auto 0;
+    border-style: none;
+}
+
+#center .row {
+    border-style: none;
+}
+
+.col-lg-8 {
+    padding: 10px 0px 10px 0px;
+    border-left: solid;
+    margin: 0 auto;
+}
+
+.col-lg-8 .row {
+    border-style: none;
+}
+
+#question {
+    border-radius: 5px;
+    background: #73AD21;
+    min-height: 50px;
+    padding: 5px 10px 5px 10px;
+}
+
+button {
+    border-radius: 100px;
+    max-width: 100%;
+    margin-top: 10px;
+    background-color: rgb(30,144,255);
+    text-align: center;
+}
+
+.col-lg-1 img.marked {
+    width: 40px;
+    height: 40px;
+    text-align: left;
+    margin-top: 10px;
+    margin-left: -10px;
+    border-style: solid 2px;
+}
+
+.scores img{
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+#btn {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#btn button {
+    width: 30%;
+    margin: 10px;
+}
+
+.letters {
+    float: left;
+}
+
+.content {
+    float: none;
+}

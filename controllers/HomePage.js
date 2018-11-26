@@ -11,6 +11,7 @@ router.get('/', restrict, (req, res) => {
 router.post('/', (req, res) => {
     req.session.field = req.body.inputField;
     req.session.difficulty = req.body.inputDifficulty;
+    req.session.time = 60;
     res.redirect(req.body.url);
 });
 
