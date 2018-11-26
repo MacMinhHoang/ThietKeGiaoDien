@@ -42,19 +42,21 @@ router.get('/', restrict, (req, res) => {
 });
 
 router.post('/', (req, res) => {
-	const { id, time, chosen } = req.body
-	let { score, right, wrong } = req.body
+	const { id, chosen } = req.body
+	let { score, time, right, wrong } = req.body
 	const answer = req.session.curQuiz.result
 	
 	if(chosen === answer){
 		req.session.right = right? parseInt(right) + 1: 1
 		req.session.wrong = wrong
 		req.session.score = score? parseInt(score) + 5: 5
+		time = parseInt(time) + 5
 		req.session.isRight = true
 	} else {
 		req.session.right = right
 		req.session.wrong = wrong? parseInt(wrong) + 1: 1
 		req.session.score = score? parseInt(score)>5? parseInt(score)- 5: 0: 0
+		time = parseInt(time)>5 ? parseInt(time) - 5 : 0
 		req.session.isRight = false
 	}
 	req.session.time = time

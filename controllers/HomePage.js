@@ -15,6 +15,8 @@ router.post('/', (req, res) => {
     req.session.right = 0;
     req.session.wrong = 0;
     req.session.score = 0;
+    req.session.isRight = "";
+    req.session.curChosen = "";
     res.redirect(req.body.url);
 });
 
