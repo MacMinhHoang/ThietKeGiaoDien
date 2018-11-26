@@ -75,16 +75,30 @@
 
 		/*after choosing an option, system will check if it's a right answer or not and display on screen*/
 		if(final && final!=="" && $('#isRight').val()){
+			clearInterval(timer);
+			displayNum(count, '.countdown')
 			if($('#isRight').val() === 'true'){
 				$('#' + final).siblings('button').css('background-color', "rgb(57, 255, 30)")
 				$('#' + final).html('<img class="marked" src="images/Icons/correct.png" />')
+				swal({
+					type: 'info',
+					title: 'Bạn có biết?',
+					text: 'Bắc Băng Dương (Arctic Ocean) là đại dương nhỏ nhất trong năm đại dương của Trái Đất, bao quanh cực Bắc. Nơi đây băng tuyết bao phủ hoàn toàn vào mùa đông và một phần quanh năm. Có diện tích 14.090.000 km² và có độ sâu trung bình 1.038 mét.'
+				}).then((result) => {
+					$('#nextForm').submit()
+				})
 			} else if($('#isRight').val() === 'false'){
 				$('#' + final).siblings('button').css('background-color', "red")
+				swal({
+					type: 'error',
+					title: 'Đáp án sai.',
+				}).then((result) => {
+					$('#nextForm').submit()
+				})
 			}
 
-			clearInterval(timer);
-			displayNum(count, '.countdown')
-			$('#btn').append('<button type="button" class="btn btn-primary" id="continue">Tiếp tục</button>')
+			
+			//$('#btn').append('<button type="button" class="btn btn-primary" id="continue">Tiếp tục</button>')
 			$('.choice').children('button').prop("disabled", true);
 		}
 
@@ -155,18 +169,18 @@
     	</div>
     	<div class="row">
     		<div class="col-lg-6 text-right">
-    			<div class="row">Lĩnh vực:</div>
+    			<div class="row field-name">Lĩnh vực :</div>
     		</div>
     		<div class="col-lg-6 text-left">
-    			<div class="row">{{session.field}}</div>
+    			<div class="row field-name">&nbsp;{{session.field}}</div>
     		</div>
     	</div>
     	<div class="row">
     		<div class="col-lg-6 text-right">
-    			<div class="row">Độ khó:</div>
+    			<div class="row field-name">Độ khó :</div>
     		</div>
     		<div class="col-lg-6 text-left">
-    			<div class="row">{{session.difficulty}}</div>
+    			<div class="row field-name">&nbsp;{{session.difficulty}}</div>
     		</div>
     	</div>
     </div>
@@ -186,7 +200,7 @@
     		{{#each session.curQuiz.options}}
 	    		<div class="choice" data-id="{{id}}">
 	    			<button class="col-lg-11">
-		    			<div class="letters"><img class="icon" src="/images/Letters/{{id}}.png" title="""></div>
+		    			<div class="letters"><img class="icon" src="/images/Letters/{{id}}.png" title=""></div>
 		    			<div class="content">{{content}}</div>
 		    		</button>
 		    		<div class="col-lg-1" id="{{id}}">
@@ -199,5 +213,5 @@
     </div>
 </div>
 <div id="btn">
-	<button type="button" class="btn btn-secondary" id="cancel">Thoát</button>
+	<button type="button" class="btn btn-secondary" id="cancel" style="font-size: 20px;">Thoát</button>
 </div>

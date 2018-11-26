@@ -20,6 +20,7 @@
     width: 300px;
     padding: 12px 20px;
     font-size: 20px;
+    text-align: center;
 }
 
 .error-404 {
@@ -69,4 +70,62 @@ ul.fields li img:hover {
     -webkit-transform: scale(1.2); /* Safari 3-8 */
     transform: scale(1.2); 
     cursor: pointer;
+}
+
+#question, .content{
+    font-size: 20px;
+    font-weight: bold;
+} 
+
+.field-name {
+    font-size: large;
+    font-weight: bold;
+}
+
+.result-panel {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.img-panel {
+    position: absolute;
+    margin-left: 270px;
+}
+
+.text-player {
+    position: absolute;
+    top: 170px;
+    left: 500px;
+    font-size: 50px;
+}
+
+.img-score {
+    position: absolute;
+    top: 250px;
+    left: 350px;
+    width: 100px;
+    height: 100px;
+}
+
+.text-score {
+    position: absolute;
+    top: 260px;
+    left: 550px;
+    font-size: 50px;
+}
+
+.img-rank {
+    position: absolute;
+    top: 350px;
+    left: 340px;
+    width: 120px;
+    height: 120px;
+}
+
+.text-rank {
+    position: absolute;
+    top: 360px;
+    left: 550px;
+    font-size: 50px;
 }

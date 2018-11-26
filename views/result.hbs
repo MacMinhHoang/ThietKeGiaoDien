@@ -1,0 +1,25 @@
+{{#section 'title'}}
+  Kết quả
+{{/section}}
+
+{{#section 'css'}}
+  
+{{/section}}
+
+{{#section 'js'}}
+    <script type="text/javascript">
+        function goHome() {
+            window.location = '/home';
+        }
+    </script>
+{{/section}}
+<div class="result-panel">
+    <img class="img-panel" src="/images/Boders/Rank_Score.png">
+    <div class="text-player"><label>{{session.user}}</label></div>
+    <img class="img-score" src="/images/Icons/scores.png"> 
+    <div class="text-score"><label>{{session.score}} điểm</label></div>
+    <img class="img-rank" src="/images/Icons/rank.png"> 
+    <div class="text-rank"><label>Hạng {{rank}}</label></div>
+</div>
+<input type="image" src="/images/Icons/back.png" width="100px" height="100px" onclick="goHome()" 
+    title="Trang Chủ">

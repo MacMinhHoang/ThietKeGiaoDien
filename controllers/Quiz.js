@@ -5,30 +5,32 @@ var router = express.Router();
 var restrict = require('../middle-wares/restrictUser');
 
 router.get('/', restrict, (req, res) => {
+	if (!req.session.questionID)
+		req.session.questionID = 1;
 	let options=[]
 	const op1 = {
         id: "1",
-        content: "Con chó"
+        content: "Thái Bình Dương"
     };
     options.push(op1)
     const op2 = {
         id: "2",
-        content: "Con mèo"
+        content: "Bắc Băng Dương"
     };
     options.push(op2)
     const op3 = {
         id: "3",
-        content: "Con gà"
+        content: "Ấn Độ Dương"
     };
     options.push(op3)
     const op4 = {
         id: "4",
-        content: "Con heo"
+        content: "Đại Tây Dương"
     };
     options.push(op4)
 
     const quiz = {
-    	question: "Put the question here",
+    	question: "Câu hỏi " + req.session.questionID + " : Đại dương nào nhỏ nhất thế giới ?",
     	options: options,
     	result: "2",
     }
@@ -61,7 +63,7 @@ router.post('/', (req, res) => {
 	}
 	req.session.time = time
 	req.session.curChosen = chosen
-
+	req.session.questionID = req.session.questionID + 1
 	res.redirect(`/quiz`)
 })
 
