@@ -1,0 +1,41 @@
+{{#section 'title'}}
+  Kết quả
+{{/section}}
+
+{{#section 'css'}}
+  
+{{/section}}
+
+{{#section 'js'}}
+    <script type="text/javascript">
+        function goHome() {
+            window.location = '/home';
+        }
+        function showMess() {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Chức năng này chưa được cài đặt'                
+            })
+        }
+    </script>
+{{/section}}
+<div class="row">
+    <div class="col-lg-1">
+        <br><br><br><br>
+        <input type="image" src="/images/Icons/back.png" width="100px" height="100px" 
+            onclick="goHome()" title="Trang Chủ">
+    </div>
+    <div class="col-lg-3">
+        {{#if winner}}
+            <img src="/images/Boders/Winner.png">
+        {{else}}
+            <img src="/images/Boders/Loser.png">
+        {{/if}}
+    </div>
+</div>
+<br><br><br>
+<div style="text-align:center">
+    <input type="image" src="https://i.imgur.com/7DArY2w.png" title="Đóng góp câu hỏi" onclick="showMess()">
+</div>
+

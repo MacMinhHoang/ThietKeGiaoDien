@@ -1,15 +1,293 @@
 {{#section 'title'}}
-  PvP
+  Đối Kháng
 {{/section}}
 
 {{#section 'css'}}
-  
+  <link rel="stylesheet" href="/css/quizPage.css">
 {{/section}}
 
 {{#section 'js'}}
 
+	<script type="text/javascript">
+
+		/*show images of numbers*/
+		function displayNum(num, ele){
+			var hnum = parseInt(num/100)
+			var tnum = hnum>0?parseInt((num%100)/10):parseInt(num/10)
+			var unum = parseInt(num%10)
+
+			var hundred = "/images/Numbers/number" + hnum + ".png"
+			var ten = "/images/Numbers/number" + tnum + ".png"
+			var unit = "/images/Numbers/number" + unum + ".png"
+			if(hnum>0){
+				$(ele).html(`<img class="icon" src=${hundred}>`)
+				$(ele).append(`<img class="icon" src=${ten}>`)
+				$(ele).append(`<img class="icon" src=${unit}>`)
+			}else if(tnum>0){
+				$(ele).html(`<img class="icon" src=${ten}>`)
+				$(ele).append(`<img class="icon" src=${unit}>`)
+			} else {
+				$(ele).html('<img class="icon" src="/images/Numbers/number0.png">')
+				$(ele).append(`<img class="icon" src=${unit}>`)
+			}
+		}
+
+		/*background sound*/
+		function sound(src) {
+		    this.sound = document.createElement("audio");
+		    this.sound.src = src;
+		    this.sound.setAttribute("preload", "auto");
+		    this.sound.setAttribute("controls", "none");
+		    this.sound.style.display = "none";
+		    document.body.appendChild(this.sound);
+		    this.play = function(){
+		        this.sound.play();
+		    }
+		    this.stop = function(){
+		        this.sound.pause();
+		    }
+		}
+
+		wrongSounds = [ 'fail1', 'fail2', 'fail3' ]
+		rightSounds = [ 'correct1', "correct2", 'correct3' ]
+
+		function randomSound(list) {
+		    var index = Math.floor(Math.random() * 1000) % list.length;
+		    new sound('/sound/' + list[index] + '.mp3').play()
+		}
+
+		/*document on ready*/   
+		/*set up count-down time*/
+		let count = 10
+		let timer = setInterval(function() {
+
+		    displayNum(--count, '.countdown')
+		    if(count === 0) {
+		    	clearInterval(timer);
+          swal({
+              type: 'warning',
+              title: 'Hết thời gian',
+              text: 'Bắt đầu câu hỏi tiếp theo trong 2s...',
+              timer: 2000            
+          }).then((result) => {
+               $('#nextForm').submit()
+          });
+		    }
+		}, 1000);
+    //clearInterval(timer);
+		/*start the music*/
+		myMusic = new sound("/sound/LoveScenario.mp3");
+		myMusic.play();
+
+		/*display the current score of player*/
+		if($('#score').val()){
+			displayNum($('#score').val(), '#yourScore')
+      		displayNum($('#opponentScore').val(), '#oppoScore')
+		} else {
+			$('.scores').html('<img class="icon" src="/images/Numbers/number0.png">')
+		}
+
+		/*display the current numbers of right answers of player*/
+		if($('#right').val()){
+			displayNum($('#right').val(), '#yourRight')
+      		displayNum($('#opponentRight').val(), '#oppoRight')
+		} else {
+			$('.right').html('<img class="icon" src="/images/Numbers/number0.png">')
+		}
+
+		/*display the current numbers of wrong answers of player*/
+		if($('#wrong').val()){
+			displayNum($('#wrong').val(), '#yourWrong')
+      		displayNum($('#opponentWrong').val(), '#oppoWrong')
+		} else {
+			$('.wrong').html('<img class="icon" src="/images/Numbers/number0.png">')
+		}
+
+    if($('#questionID').val() > 5)
+    {
+      clearInterval(timer);
+      swal({
+          type: 'warning',
+          title: 'Kết thúc',                         
+      }).then((result) => {
+          $('#cancelForm').submit()
+      });
+    }
+
+		const final = $('#chosen').val() /*player's choice*/
+
+		/*after choosing an option, system will check if it's a right answer or not and display on screen*/
+		if(final && final!=="" && $('#isRight').val()){
+			clearInterval(timer);
+			displayNum(count, '.countdown')
+			if($('#isRight').val() === 'true'){
+				$('#' + final).siblings('button').css('background-color', "rgb(57, 255, 30)")
+				$('#' + final).html('<img class="marked" src="images/Icons/correct.png" />')
+				randomSound(rightSounds)
+				swal({
+					type: 'success',
+					title: 'Đáp án chính xác.'
+				}).then((result) => {
+					$('#nextForm').submit()
+				})
+			} else if($('#isRight').val() === 'false'){
+				$('#' + final).siblings('button').css('background-color', "red")
+				randomSound(wrongSounds)
+				swal({
+					type: 'error',
+					title: 'Đáp án sai.',
+				}).then((result) => {
+					$('#nextForm').submit()
+				})
+			}
+
+			$('.choice').children('button').prop("disabled", true);
+		}
+
+		/*when player chooses an option*/
+	 	$('.choice').click(function(){
+			
+			clearInterval(timer);
+			const chosen = $(this).data('id')
+			$('#chosen').val(chosen);
+			//$('#time').val(count);
+			$('#myForm').submit()
+		})
+
+		/*when player wants to stop the game*/
+		$('#cancel').click(function(){
+			swal({
+				title: 'Bạn có chắc chắn muốn thoát?',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Thoát',
+				cancelButtonText: 'Hủy'
+				}).then((result) => {
+				if (result.value) {
+					$('#cancelForm').submit()
+				}
+			})
+		})
+
+	</script>
 {{/section}}
 
-{{session.field}}
 <br>
-{{session.difficulty}}
+<form id="myForm" method="POST">
+	<input type="hidden" value="{{session.score}}" id="score" name="score">
+	<input type="hidden" value="{{session.right}}" id="right" name="right">
+	<input type="hidden" value="{{session.wrong}}" id="wrong" name="wrong">
+  	<input type="hidden" value="{{session.opponentScore}}" id="opponentScore" name="opponentScore">
+	<input type="hidden" value="{{session.opponentRight}}" id="opponentRight" name="opponentRight">
+	<input type="hidden" value="{{session.opponentWrong}}" id="opponentWrong" name="opponentWrong">
+	<input type="hidden" value="{{session.curChosen}}" id="chosen" name="chosen">
+	<input type="hidden" value="{{session.isRight}}" id="isRight" >
+  <input type="hidden" value="{{session.questionID}}" id="questionID" name="questionID">
+</form>
+
+<form id="nextForm" method="POST" action="/pvp/next"></form>
+<form id="cancelForm" method="POST" action="/pvp/cancel"></form>
+
+<div class="row">
+    <div class="col-lg-3" style="border-left: transparent;">
+    	<label>Bạn</label>
+    </div>
+    <div class="col-lg-3">
+    	<img class="icon" src="/images/Icons/smile.png" title="Trả lời đúng">
+    	<div class="right" id="yourRight">
+    		<img class="icon tens" src="/images/Numbers/number1.png" style="display:none" />
+    		<img class="icon units" src="/images/Numbers/number1.png" style="display:none" />
+    	</div>
+    </div>
+    <div class="col-lg-3">
+    	<img class="icon" src="/images/Icons/scores.png" title="Điểm hiện tại">
+    	<div class="scores" id="yourScore">
+    	</div>
+    </div>
+    <div class="col-lg-3">
+    	<img class="icon" src="/images/Icons/sad.png" title="Trả lời sai">
+    	<div class="wrong" id="yourWrong"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3" style="border-left: transparent;">
+    	<label>Annabelle </label>
+    </div>
+    <div class="col-lg-3">
+    	<img class="icon" src="/images/Icons/smile.png" title="Trả lời đúng">
+    	<div class="right" id="oppoRight">
+    		<img class="icon tens" src="/images/Numbers/number1.png" style="display:none" />
+    		<img class="icon units" src="/images/Numbers/number1.png" style="display:none" />
+    	</div>
+    </div>
+    <div class="col-lg-3">
+    	<img class="icon" src="/images/Icons/scores.png" title="Điểm hiện tại">
+    	<div class="scores" id="oppoScore">
+    	</div>
+    </div>
+    <div class="col-lg-3">
+    	<img class="icon" src="/images/Icons/sad.png" title="Trả lời sai">
+    	<div class="wrong" id="oppoWrong"></div>
+    </div>
+</div>
+
+<div class="row row-eq-height">
+    <div class="col-lg-4" id="center">
+    	<div class="row">
+    		<div class="col-lg-6 text-right">
+    			<img class="icon" src="/images/Icons/time.png" title="Đếm ngược">
+    		</div>
+    		<div class="col-lg-6 text-left">
+    			<div class="countdown"></div>
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-lg-6 text-right">
+    			<div class="row field-name">Lĩnh vực :</div>
+    		</div>
+    		<div class="col-lg-6 text-left">
+    			<div class="row field-name">&nbsp;{{session.field}}</div>
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-lg-6 text-right">
+    			<div class="row field-name">Độ khó :</div>
+    		</div>
+    		<div class="col-lg-6 text-left">
+    			<div class="row field-name">&nbsp;{{session.difficulty}}</div>
+    		</div>
+    	</div>
+    </div>
+    <div class="col-lg-8">
+    	<div class="row">
+    		<div class="col-lg-1">
+	    		<img class="icon" src="/images/Logos/question-mark2.png" title="Câu hỏi">
+	    	</div>
+	    	<div class="col-lg-10">
+	    		<div id="question">{{session.curQuiz.question}}</div>
+	    	</div>
+    	</div>
+    	
+    	<div class="row">
+    		<div class="col-lg-1"></div>
+    		<div class="col-lg-11">
+    		{{#each session.curQuiz.options}}
+	    		<div class="choice" data-id="{{id}}">
+	    			<button class="col-lg-11">
+		    			<div class="letters"><img class="icon" src="/images/Letters/{{id}}.png" title=""></div>
+		    			<div class="content">{{content}}</div>
+		    		</button>
+		    		<div class="col-lg-1" id="{{id}}">
+			    		
+			    	</div>
+	    		</div>
+	    	{{/each}}
+	    	</div>
+    	</div>
+    </div>
+</div>
+<div id="btn">
+	<button type="button" class="btn btn-secondary" id="cancel" style="font-size: 20px;">Thoát</button>
+</div>

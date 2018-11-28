@@ -74,7 +74,9 @@ router.post('/next', (req, res) => {
 })
 
 router.post('/cancel', (req, res) => {
-	res.redirect('/result')
+	if (req.session.questionID)
+        req.session.questionID = null
+	res.redirect('/result/quiz')
 })
 
 module.exports = router;

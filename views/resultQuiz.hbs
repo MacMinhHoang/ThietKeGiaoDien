@@ -11,6 +11,13 @@
         function goHome() {
             window.location = '/home';
         }
+        function showMess() {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Chức năng này chưa được cài đặt'                
+            })
+        }
     </script>
 {{/section}}
 <div class="result-panel">
@@ -23,3 +30,6 @@
 </div>
 <input type="image" src="/images/Icons/back.png" width="100px" height="100px" onclick="goHome()" 
     title="Trang Chủ">
+<div style="text-align:center; margin-top: 400px;">
+    <input type="image" src="https://i.imgur.com/7DArY2w.png" title="Đóng góp câu hỏi" onclick="showMess()">
+</div>

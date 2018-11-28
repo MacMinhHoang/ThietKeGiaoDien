@@ -8,6 +8,17 @@
     padding: 10px;
 }
 
+.col-lg-3 {
+    border-left: solid;
+    text-align: center;
+    padding: 10px;
+}
+
+.col-lg-3 label {
+    font-size: 30px;
+    margin-top: 30px;
+}
+
 .icon {
     width: 50px;
     height: 50px;

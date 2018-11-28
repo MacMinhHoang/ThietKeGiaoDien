@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+hr {
+    font-weight: bold;
+}
+
 .nickname-box {
     border: 2px solid DodgerBlue;
     border-width: 20px; 

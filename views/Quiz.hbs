@@ -69,7 +69,7 @@
                     title: 'Hết thời gian',
                     text: 'Lượt chơi của bạn đã kết thúc!'                
                 }).then((result) => {
-                    window.location = "/result";
+                    $('#cancelForm').submit()
                 });
 		    }
 		}, 1000);
@@ -149,7 +149,19 @@
 
 		/*when player wants to stop the game*/
 		$('#cancel').click(function(){
-			$('#cancelForm').submit()
+			swal({
+				title: 'Bạn có chắc chắn muốn thoát?',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Thoát',
+				cancelButtonText: 'Hủy'
+				}).then((result) => {
+				if (result.value) {
+					$('#cancelForm').submit()
+				}
+			})
 		})
 
 	</script>
