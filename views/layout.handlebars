@@ -1,31 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{{_sections.title}}}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Title" content="Update Yourself" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) { 
+            var msViewportStyle = document.createElement("style");
+            msViewportStyle.appendChild(document.createTextNode("@-ms-viewport{width:device-width}")); 
+            document.getElementsByTagName("head")[0].appendChild(msViewportStyle); 
+        }
+    </script>
+    <link rel="shortcut icon" href="/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/style.css">
     {{{_sections.css}}}
 </head>
+
 <body>
-    <div class="header">
-        <img class="page-logo" src="/images/Logos/UY_Logo2.png" id="logo">
-    </div>
-
-    <div class="container">
+    {{{_sections.loader}}}
+    <div id="mainHolder">
+        <div id="option" class="fitImg">
+            <div id="buttonOption" class="buttonClick buttonIcon buttonOptionOff"><img class="optionOff" alt="Begin"
+                    src="/assets/button_option_close.png" /><img class="optionOn" alt="Begin" src="/assets/button_option.png" /></div>
+            <div id="optionList" style="display:none;">
+                <div id="buttonFullscreen" class="buttonClick buttonIcon buttonFullscreen"><img alt="Begin" src="/assets/button_fullscreen.png" /></div>
+                <div id="buttonSound" class="buttonClick buttonIcon buttonSound buttonSoundOn"><img class="soundOff"
+                        alt="Begin" src="/assets/button_sound_off.png" /><img class="soundOn" alt="Begin" src="/assets/button_sound_on.png" /></div>
+                <div id="buttonExit" class="buttonClick buttonIcon buttonExit"><img alt="Begin" src="/assets/button_exit.png" /></div>
+            </div>
+        </div>
+        
+        <div id="confirmHolder" class="overlayBg">
+            <div class="confirmContent">
+                <div class="message fontMessage resizeFont ignorePadding" data-fontSize="30" data-lineHeight="30">Are
+                    you sure you want to quit the game?</div>
+                <div id="buttonOk" class="okImg buttonClick fitImg"><img src="/assets/button_ok.png" /></div>
+                <div id="buttonCancel" class="cancelImg buttonClick fitImg"><img src="/assets/button_cancel.png" /></div>
+            </div>
+        </div>
         {{{body}}}
+        {{!-- <div id="gameHolder">
+            <div id="gameStatus" class="fitImg">
+                <div class="gameTotal fontStatus">
+                    <div class="gameQuestionStatus resizeFont" data-fontSize="30" data-lineHeight="30">1/18</div><img
+                        class="soundOn" alt="Begin" src="/assets/item_question.png" />
+                </div>
+                <div class="gameTimer fontStatus">
+                    <div class="gameTimerStatus resizeFont" data-fontSize="30" data-lineHeight="30">35</div><img class="soundOn"
+                        alt="Begin" src="/assets/item_timer.png" />
+                </div>
+            </div>
+            <div id="questionLoaderHolder"> </div>
+            <div id="questionHolder">
+                <div class="questionText fontQuestion">How much is 150% of 50<br />How much is 150% of 50</div>
+            </div>
+            <div id="questionResultHolder">
+                <div id="explanationHolder"></div>
+                <div class="questionResultText fontCorrectWrong"></div>
+                <div id="buttonNextQues" class="nextImg fontCorrectWrong buttonClick fitImg"><img src="/assets/button_next.png" /></div>
+                <div id="buttonPreviewQues" class="previewImg fontCorrectWrong buttonClick fitImg"><img src="/assets/button_preview.png" /></div>
+            </div>
+        </div> --}}
+        {{!-- <div id="resultHolder">
+            <div class="resultExtra overlayBg fitImg">
+                <div class="submitContent">
+                    <div class="fontSubmitTitle resizeFont submitTitle" data-fontSize="50" data-lineHeight="50"></div>
+                    <div class="fontLabel label resizeFont">Name:</div><input id="uName" name="uName" type="text" class="fontInput resizeFont">
+                    <div class="fontLabel label resizeFont">Email:</div><input id="uEmail" name="uEmail" type="text"
+                        class="fontInput resizeFont">
+                    <div class="action">
+                        <div id="buttonSubmit" class="buttonSubmit buttonClick"><img src="/assets/button_submit.png" /></div>
+                        <div id="buttonCancelSubmit" class="buttonCancelSubmit buttonClick"><img src="/assets/button_cancel.png" /></div>
+                    </div>
+                </div>
+                <div class="scoreContent">
+                    <div class="fontScoreTitle resizeFont scoreTitle" data-fontSize="50" data-lineHeight="50"></div>
+                    <ul class="scoreList"> </ul>
+                    <div id="buttonBack" class="buttonBack buttonClick"><img src="/assets/button_back.png" /></div>
+                </div>
+            </div>
+            <div class="resultContent fitImg">
+                <div class='itemWinnerCup'><img src="/assets/item_cup.png" /></div>
+                <div id='resultScore' class="fontResultScore fontScore resizeFont" data-fontSize="50" data-lineHeight="50">100</div>
+                <div class="option singleOption">
+                    <ul>
+                        <li id="buttonReplay" class="buttonClick fitImg"><img alt="Replay" src="/assets/button_replay.png" /></li>
+                        <li id="buttonSave" class="buttonClick fitImg"><img alt="Replay" src="/assets/button_save.png" /></li>
+                        <li id="buttonScore" class="buttonClick fitImg"><img alt="Replay" src="/assets/button_score.png" /></li>
+                    </ul>
+                </div>
+                <div id="shareOption" class="share">
+                    <div class="fontShare resizeFont" data-fontSize="30" data-lineHeight="30">Share you score</div>
+                    <ul>
+                        <li id="buttonFacebook" class="buttonClick fitImg"><img alt="Facebook" src="/assets/button_facebook.png" /></li>
+                        <li id="buttonTwitter" class="buttonClick fitImg"><img alt="Twitter" src="/assets/button_twitter.png" /></li>
+                        <li id="buttonGoogle" class="buttonClick fitImg"><img alt="Google" src="/assets/button_google.png" /></li>
+                    </ul>
+                </div>
+            </div>
+        </div> --}}
     </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.1/dist/sweetalert2.all.min.js"></script>
-    <script type="text/javascript">
-        $('#logo').on('click', function() {
-            window.location.href = "/home";
-        });
+    <script src="/js/vendor/jquery.ui.touch-punch.min.js"></script>
+    <script src="/js/vendor/detectmobilebrowser.js"></script>
+    <script src="/js/vendor/createjs-2015.11.26.min.js"></script>
+    <script src="/js/vendor/TweenMax.min.js"></script>
+    <script src="/js/init.js"></script>
+    <script>
+        var resumeAudioContext = function () {
+                try { 
+                    "suspended" === createjs.WebAudioPlugin.context.state && (createjs.WebAudioPlugin.context.resume(), 
+                    window.removeEventListener("click", resumeAudioContext)) 
+                } 
+                catch (e) { 
+                    console.error("There was an error while trying to resume the SoundJS Web Audio context..."), 
+                    console.error(e) 
+                }
+        }; 
+        window.addEventListener("click", resumeAudioContext);
     </script>
+    <script src="/js/cross/cross.js" data-banner='true' data-link='https://codecanyon.net/item/quiz-game-2-html5-game/20593574'></script>
     {{{_sections.js}}}
 </body>
+
 </html>

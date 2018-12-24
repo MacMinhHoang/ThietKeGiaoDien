@@ -3,36 +3,32 @@
 {{/section}}
 
 {{#section 'css'}}
-  
+
 {{/section}}
 
 {{#section 'js'}}
     <script type="text/javascript">
-        function showMess() {
-            swal({
-                type: 'error',
-                title: 'Oops...',
-                text: 'Chức năng này chưa được cài đặt'                
-            })
-        }
+        $('#MyBtnStart').click(function() {
+            $('#MyBtnSubmit').click()
+        })
     </script>
 {{/section}}
 
-<form method="POST">
-<div style="margin: auto; width: 50%;">
-    
-        <div>
-            <img src="/images/Logos/question-mark2.png" width="40%" height="40%" style="float:left">
-            <br>
-            <input type="text" class="form-control nickname-box" id="nickname" name="nickname" required
-                placeholder="Nhập Nickname của bạn">
-        </div>
+{{#section 'loader'}}
+  <div id="mainLoader"><img src="/assets/loader.png" /><br><span>0</span></div>
+{{/section}}
+
+<div id="logoHolder">
+    <div class="mainContent fitImg">
+        <div class="logo"><img src="/assets/logo.png" /></div>
+        <br><br>
+        <div class="preloadText fontPreload resizeFont"></div>
+        <form method="POST" id="formNickname">
+            <input type="text" name="nickname" class="form-control" required="required" 
+                placeholder="Nhập nickname của bạn"/>  
+            <input type="submit" style="display:none;" id="MyBtnSubmit">
+        </form>
         <br>
-        &nbsp&nbsp<input type="image" alt="Submit" src="https://i.imgur.com/mXncjKT.png">
-</div>
-</form>
-<br><br>
-<hr>
-<div style="margin-left: 400px; clear:both">
-    <input type="image" src="https://i.imgur.com/9jLRuPe.png" onclick="showMess()">    
+        <div id="MyBtnStart" class="startImg buttonClick"><img src="/assets/button_start.png" /></div>
+    </div>
 </div>

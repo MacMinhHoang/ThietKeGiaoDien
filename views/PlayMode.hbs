@@ -1,0 +1,48 @@
+{{#section 'title'}}
+  Chọn Chế Độ
+{{/section}}
+
+{{#section 'css'}}
+    <style>
+        #categoryHolder {
+            display: block !important;
+        }
+
+        li.categoryThumb {
+            margin-left: 150px;
+        }
+    </style>
+{{/section}}
+
+{{#section 'js'}}
+    <script type="text/javascript">
+        $('.categoryThumb').click(function() {
+            $('#chosenMode').val($(this).data('id'));
+            $('#formMode').submit();
+        })
+    </script>
+{{/section}}
+<form method="POST" id="formMode" action="">
+    <input type="hidden" id="chosenMode" name="playmode">
+</form>
+<div id="categoryHolder">
+    <div class="categoryContent fitImg">
+        <br><br><br><br>
+        <ul>
+            <li class="categoryThumb buttonClick" data-id="Solo">
+                <div><img src="/assets/mode_solo.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Chơi một mình
+                </div>
+            </li>
+            <li class="categoryThumb buttonClick" data-id="PvP">
+                <div><img src="/assets/mode_pvp.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Đấu với người khác
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

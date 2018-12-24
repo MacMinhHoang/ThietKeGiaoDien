@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     req.session.user = req.body.nickname;
-    res.redirect('/home')
+    res.redirect('/home/Category')
 });
 
 module.exports = router;

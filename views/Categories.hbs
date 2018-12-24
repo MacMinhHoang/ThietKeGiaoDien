@@ -1,0 +1,81 @@
+{{#section 'title'}}
+  Chọn Thể Loại
+{{/section}}
+
+{{#section 'css'}}
+    <style>
+        #categoryHolder {
+            display: block !important;
+        }
+    </style>
+{{/section}}
+
+{{#section 'js'}}
+    <script type="text/javascript">
+        let nswitch = 0;
+        $('.MyBtnNP').click(function() {
+            if (nswitch == 0)
+            {
+                $('li:lt(3)').hide();
+                $('li:gt(2)').show();
+                nswitch = 1;
+            }
+            else 
+            {
+                $('li:lt(3)').show();
+                $('li:gt(2)').hide();
+                nswitch = 0;
+            }
+        })
+        $('.categoryThumb').click(function() {
+            $('#chosenCat').val($(this).data('id'));
+            $('#formCat').submit();
+        })
+    </script>
+{{/section}}
+<form method="POST" id="formCat" action="">
+    <input type="hidden" id="chosenCat" name="category">
+</form>
+<div id="categoryHolder">
+    <div class="categoryContent fitImg">
+        <div id="buttonNextCat" class="nextImg buttonClick fitImg MyBtnNP"><img src="/assets/button_next.png" /></div>
+        <div id="buttonPrevCat" class="prevImg buttonClick fitImg MyBtnNP"><img src="/assets/button_prev.png" /></div>
+        <ul>
+            <li class="categoryThumb buttonClick" data-id="Thể Thao">
+                <div><img src="/assets/cat_sport.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Thể Thao
+                </div>
+            </li>
+            <li class="categoryThumb buttonClick" data-id="Địa Lý">
+                <div><img src="/assets/cat_earth.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Địa Lý
+                </div>
+            </li>
+            <li class="categoryThumb buttonClick" data-id="Phim Ảnh">
+                <div><img src="/assets/cat_movie.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Phim Ảnh
+                </div>
+            </li>
+            <li class="categoryThumb buttonClick" style="display: none;" data-id="Du Lịch"> 
+                <div><img src="/assets/cat_travel.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Du Lịch
+                </div>
+            </li>
+            <li class="categoryThumb buttonClick" style="display: none;" data-id="Động Vật"> 
+                <div><img src="/assets/cat_animal.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Động Vật
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

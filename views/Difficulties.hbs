@@ -1,0 +1,54 @@
+{{#section 'title'}}
+  Chọn Độ Khó
+{{/section}}
+
+{{#section 'css'}}
+    <style>
+        #categoryHolder {
+            display: block !important;
+        }
+    </style>
+{{/section}}
+
+{{#section 'js'}}
+  <script type="text/javascript">
+        $('.categoryThumb').click(function() {
+            $('#chosenDif').val($(this).data('id'));
+            $('#formDif').submit();
+        })
+    </script>
+{{/section}}
+
+<form method="POST" id="formDif" action="">
+    <input type="hidden" id="chosenDif" name="difficulty">
+</form>
+<div id="categoryHolder">
+    <div class="categoryContent fitImg">
+        <br><br><br><br>
+        <ul>
+            <li class="categoryThumb buttonClick" data-id="Dễ">
+                <div><img src="/assets/dif_easy.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Dễ
+                </div>
+            </li>
+            <li class="categoryThumb buttonClick" data-id="Trung Bình">
+                <div><img src="/assets/dif_medium.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Trung Bình
+                </div>
+            </li>
+            <li class="categoryThumb buttonClick" data-id="Khó">
+                <div><img src="/assets/dif_hard.png"></div>
+                <div class="categoryTitle fontCategory resizeFont myFont" data-fontsize="20" 
+                    data-lineheight="20">
+                    Khó
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+

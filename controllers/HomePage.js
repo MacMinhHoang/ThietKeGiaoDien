@@ -5,19 +5,35 @@ var router = express.Router();
 var restrict = require('../middle-wares/restrictUser');
 
 router.get('/', restrict, (req, res) => {
-    res.render('HomePage');
+    res.redirect('/home/Category')
 });
 
-router.post('/', (req, res) => {
-    req.session.field = req.body.inputField;
-    req.session.difficulty = req.body.inputDifficulty;
-    req.session.time = 60;
-    req.session.right = 0;
-    req.session.wrong = 0;
-    req.session.score = 0;
-    req.session.isRight = "";
-    req.session.curChosen = "";
-    res.redirect(req.body.url);
+router.get('/Category', restrict, (req, res) => {
+    res.render('Categories');
+});
+
+router.post('/Category', (req, res) => {
+    req.session.cat = req.body.category;
+    res.redirect('/home/Difficulty')
+});
+
+router.get('/Difficulty', restrict, (req, res) => {
+    res.render('Difficulties');
+});
+
+router.post('/Difficulty', (req, res) => {
+    req.session.dif = req.body.difficulty;
+    res.redirect('/home/PlayMode')
+});
+
+router.get('/PlayMode', restrict, (req, res) => {
+    res.render('PlayMode');
+});
+
+router.post('/PlayMode', (req, res) => {
+    if (req.body.playmode === "Solo")
+        res.redirect('/quiz');
+    else res.redirect('/pvp');
 });
 
 module.exports = router;
