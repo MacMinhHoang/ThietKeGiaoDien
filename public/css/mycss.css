@@ -13,3 +13,33 @@
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.answer[type="text1"]{
+	left: 14px;
+}
+
+#result{
+	display: flex;
+	height: 50px;
+	width: 100%;
+}
+
+.right{
+    float: left;
+    width: 50%;
+    margin-right: 10px;
+}
+
+.wrong{
+    float: right;
+    margin-left: 20px;
+}
+
+.rank{
+	display: block;	
+}
+
+#buttonNextQues{
+    margin: auto;
+    margin-top: 20px;
+}

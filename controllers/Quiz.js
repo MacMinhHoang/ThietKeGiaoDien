@@ -5,40 +5,49 @@ var router = express.Router();
 var restrict = require('../middle-wares/restrictUser');
 
 router.get('/', restrict, (req, res) => {
-	if (!req.session.questionID)
+	if (!req.session.questionID){
 		req.session.questionID = 1;
+		req.session.score = 0;
+		req.session.right = 0;
+		req.session.wrong = 0;
+	}
+	let type = ''
+	if(req.session.questionID%2==0) type = "text4";
+		
 	let options=[]
 	const op1 = {
-        id: "1",
+        id: "a",
         content: "Thái Bình Dương"
     };
     options.push(op1)
     const op2 = {
-        id: "2",
+        id: "b",
         content: "Bắc Băng Dương"
     };
     options.push(op2)
     const op3 = {
-        id: "3",
+        id: "c",
         content: "Ấn Độ Dương"
     };
     options.push(op3)
     const op4 = {
-        id: "4",
+        id: "d",
         content: "Đại Tây Dương"
     };
     options.push(op4)
 
     const quiz = {
-    	question: "Câu hỏi " + req.session.questionID + " : Đại dương nào nhỏ nhất thế giới ?",
+    	question: "Đại dương nào nhỏ nhất thế giới ?",
     	options: options,
-    	result: "2",
+    	result: "b",
+    	type: type
     }
 
     req.session.curQuiz = quiz
 
     const vm = {
         session: req.session,
+        notify: false
     }
     res.render('Quiz', vm);
 });
@@ -64,7 +73,7 @@ router.post('/', (req, res) => {
 	req.session.time = time
 	req.session.curChosen = chosen
 	req.session.questionID = req.session.questionID + 1
-	res.redirect(`/quiz`)
+	res.render(`perQuiz`, {session: req.session})
 })
 
 router.post('/next', (req, res) => {
@@ -76,6 +85,7 @@ router.post('/next', (req, res) => {
 router.post('/cancel', (req, res) => {
 	if (req.session.questionID)
         req.session.questionID = null
+    req.session.time = 60
 	res.redirect('/result/quiz')
 })
 

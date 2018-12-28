@@ -7,8 +7,9 @@ var restrict = require('../middle-wares/restrictUser');
 router.get('/quiz', restrict, (req, res) => {
     var vm = {
         session: req.session,
-        rank: 10
+        rank: 10,
     }
+
     res.render('resultQuiz', vm);
 });
 

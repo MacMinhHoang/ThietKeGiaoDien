@@ -33,7 +33,7 @@
                 <div id="buttonFullscreen" class="buttonClick buttonIcon buttonFullscreen"><img alt="Begin" src="/assets/button_fullscreen.png" /></div>
                 <div id="buttonSound" class="buttonClick buttonIcon buttonSound buttonSoundOn"><img class="soundOff"
                         alt="Begin" src="/assets/button_sound_off.png" /><img class="soundOn" alt="Begin" src="/assets/button_sound_on.png" /></div>
-                <div id="buttonExit" class="buttonClick buttonIcon buttonExit"><img alt="Begin" src="/assets/button_exit.png" /></div>
+                <div id="button" class="buttonClick buttonIcon buttonExit" onclick="goHome()"><img alt="Begin" src="/assets/button_exit.png" /></div>
             </div>
         </div>
         
@@ -128,6 +128,9 @@
                 }
         }; 
         window.addEventListener("click", resumeAudioContext);
+        function goHome() {
+            window.location = '/home';
+        }
     </script>
     <script src="/js/cross/cross.js" data-banner='true' data-link='https://codecanyon.net/item/quiz-game-2-html5-game/20593574'></script>
     {{{_sections.js}}}

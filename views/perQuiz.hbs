@@ -1,0 +1,32 @@
+{{#section 'css'}}
+    <style>
+        #questionResultHolder {
+            display: block !important;
+        }
+    </style>
+{{/section}}
+
+{{#section 'js'}}
+	<script type="text/javascript">
+		$('#buttonNextQues').click(function(){
+			
+			$('#nextForm').submit()
+		})
+
+	</script>
+{{/section}}
+
+<form id="nextForm" method="POST" action="/quiz/next"></form>
+
+<div id="questionResultHolder" style="display: block; opacity: 1;"> 
+	<div id="explanationHolder">
+		<div class="explanation fontExplanation resizeFont" data-fontsize="35" data-lineheight="35" style="font-size: 21px; line-height: 21px; color: rgb(204, 204, 204); text-align: center; top: 25%; left: 5%; width: 90%;">Điểm hiện tại: {{session.score}}</div>
+		<div class="explanation fontExplanation resizeFont" data-fontsize="35" data-lineheight="35" style="font-size: 21px; line-height: 21px; color: rgb(204, 204, 204); text-align: center; top: 45%; left: 5%; width: 90%;"> 'Bắc Băng Dương (Arctic Ocean) là đại dương nhỏ nhất trong năm đại dương của Trái Đất, bao quanh cực Bắc. Nơi đây băng tuyết bao phủ hoàn toàn vào mùa đông và một phần quanh năm. Có diện tích 14.090.000 km² và có độ sâu trung bình 1.038 mét.' </div>
+	</div>
+	{{#if session.isRight}}
+	<div data-fontsize="50" data-lineheight="50" style="font-size: 50px; line-height: 50px; color: rgb(255, 255, 255); top: 30%; left: 5%; width: 90%; height: 70%; text-align: center; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">That's Correct</div>
+	{{else}}
+	<div data-fontsize="50" data-lineheight="50" style="font-size: 50px; line-height: 50px; color: rgb(255, 255, 255); top: 30%; bottom: 0%; left: 5%; width: 90%; height: 70%; text-align: center; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><div id="incorrect">Incorrect!</div></div>
+	{{/if}}
+	<div id="buttonNextQues" class="nextImg fontCorrectWrong buttonClick fitImg"><img src="assets/button_next.png"></div>
+</div>
