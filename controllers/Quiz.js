@@ -12,7 +12,12 @@ router.get('/', restrict, (req, res) => {
 		req.session.wrong = 0;
 	}
 	let type = ''
-	if(req.session.questionID%2==0) type = "text4";
+	if(req.session.questionID%2==0) {
+		req.session.even = true
+		type="text4"
+	}else{
+		req.session.even = false
+	}
 		
 	let options=[]
 	const op1 = {
@@ -72,13 +77,13 @@ router.post('/', (req, res) => {
 	}
 	req.session.time = time
 	req.session.curChosen = chosen
-	req.session.questionID = req.session.questionID + 1
 	res.render(`perQuiz`, {session: req.session})
 })
 
 router.post('/next', (req, res) => {
 	req.session.isRight = ""
 	req.session.curChosen = ""
+	req.session.questionID = req.session.questionID + 1
 	res.redirect('/quiz')
 })
 

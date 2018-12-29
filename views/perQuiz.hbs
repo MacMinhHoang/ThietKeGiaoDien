@@ -1,6 +1,6 @@
 {{#section 'css'}}
     <style>
-        #questionResultHolder {
+        #gameHolder {
             display: block !important;
         }
     </style>
@@ -18,15 +18,30 @@
 
 <form id="nextForm" method="POST" action="/quiz/next"></form>
 
-<div id="questionResultHolder" style="display: block; opacity: 1;"> 
-	<div id="explanationHolder">
-		<div class="explanation fontExplanation resizeFont" data-fontsize="35" data-lineheight="35" style="font-size: 21px; line-height: 21px; color: rgb(204, 204, 204); text-align: center; top: 25%; left: 5%; width: 90%;">Điểm hiện tại: {{session.score}}</div>
-		<div class="explanation fontExplanation resizeFont" data-fontsize="35" data-lineheight="35" style="font-size: 21px; line-height: 21px; color: rgb(204, 204, 204); text-align: center; top: 45%; left: 5%; width: 90%;"> 'Bắc Băng Dương (Arctic Ocean) là đại dương nhỏ nhất trong năm đại dương của Trái Đất, bao quanh cực Bắc. Nơi đây băng tuyết bao phủ hoàn toàn vào mùa đông và một phần quanh năm. Có diện tích 14.090.000 km² và có độ sâu trung bình 1.038 mét.' </div>
+<div id="gameHolder" style="display: block; opacity: 1;"> 
+	<div id="gameStatus" class="fitImg"> 
+		<div class="gameTotal fontStatus"> 
+			<div class="gameQuestionStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 20px; line-height: 20px;">{{session.questionID}}</div>
+			<img class="soundOn" alt="Begin" src="/assets/item_question.png"> 
+		</div>
+		<div class="gameTimer fontStatus"> 
+			<div class="gameTimerStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 20px; line-height: 20px;">{{session.time}}</div>
+			<img class="soundOn" alt="Begin" src="/assets/item_timer.png"> 
+		</div>
 	</div>
-	{{#if session.isRight}}
-	<div data-fontsize="50" data-lineheight="50" style="font-size: 50px; line-height: 50px; color: rgb(255, 255, 255); top: 30%; left: 5%; width: 90%; height: 70%; text-align: center; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">That's Correct</div>
-	{{else}}
-	<div data-fontsize="50" data-lineheight="50" style="font-size: 50px; line-height: 50px; color: rgb(255, 255, 255); top: 30%; bottom: 0%; left: 5%; width: 90%; height: 70%; text-align: center; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><div id="incorrect">Incorrect!</div></div>
-	{{/if}}
-	<div id="buttonNextQues" class="nextImg fontCorrectWrong buttonClick fitImg"><img src="assets/button_next.png"></div>
+	<div id="questionResultHolder" style="display: block; opacity: 1;"> 
+		<div id="explanationHolder">
+			{{#if session.even}}
+			<div class="explanation fontExplanation resizeFont" data-fontsize="35" data-lineheight="35" style="font-size: 23px; line-height: 23px; color: rgb(204, 204, 204); text-align: center; top: 25%; left: 5%; width: 90%; height: 10%;">Bắc Băng Dương (Arctic Ocean) là đại dương nhỏ nhất trong năm đại dương của Trái Đất, bao quanh cực Bắc. Nơi đây băng tuyết bao phủ hoàn toàn vào mùa đông và một phần quanh năm. Có diện tích 14.090.000 km² và có độ sâu trung bình 1.038 mét.</div>{{else}}
+			<div class="explanation fontExplanation resizeFont" data-fontsize="35" data-lineheight="35" style="font-size: 23px; line-height: 23px; color: rgb(204, 204, 204); text-align: center; top: 25%; left: 5%; width: 90%; height: 10%;">Voi là động vật</div>{{/if}}
+		</div>
+		{{#if session.isRight}}
+		<div data-fontsize="50" data-lineheight="50" style="font-size: 50px; margin-top: 10%; line-height: 50px; color: rgb(255, 255, 255); text-align: center; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">That's Correct</div>
+		{{else}}
+		<div data-fontsize="50" data-lineheight="50" style="font-size: 50px; margin-top: 10%; line-height: 50px; color: rgb(255, 255, 255); text-align: center; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><div id="incorrect">Incorrect!</div></div>
+		{{/if}}
+		<div id="buttonNextQues" style="left: 48%" class="nextImg fontCorrectWrong buttonClick fitImg"><img src="assets/button_next.png"></div>
+	</div>
 </div>
+
+
