@@ -10,6 +10,7 @@ router.get('/', restrict, (req, res) => {
 		req.session.score = 0;
 		req.session.right = 0;
 		req.session.wrong = 0;
+		req.session.isNeg = false;
 	}
 	let type = ''
 	if(req.session.questionID%2==0) {
@@ -68,12 +69,17 @@ router.post('/', (req, res) => {
 		req.session.score = score? parseInt(score) + 5: 5
 		time = parseInt(time) + 5
 		req.session.isRight = true
+		req.session.isNeg = false
 	} else {
 		req.session.right = right
 		req.session.wrong = wrong? parseInt(wrong) + 1: 1
-		req.session.score = score? parseInt(score)>5? parseInt(score)- 5: 0: 0
+		req.session.score = score? parseInt(score)>2? parseInt(score)- 2: 0: 0
 		time = parseInt(time)>5 ? parseInt(time) - 5 : 0
 		req.session.isRight = false
+		if(parseInt(score)<2){
+			req.session.isNeg = true
+		}
+
 	}
 	req.session.time = time
 	req.session.curChosen = chosen
@@ -90,7 +96,7 @@ router.post('/next', (req, res) => {
 router.post('/cancel', (req, res) => {
 	if (req.session.questionID)
         req.session.questionID = null
-    req.session.time = 60
+    req.session.time = 5
 	res.redirect('/result/quiz')
 })
 

@@ -20,7 +20,9 @@
 
 <div id="resultHolder">
     <div class="resultContent fitImg">
-        <div class='itemWinnerCup'><img src="/assets/item_cup.png" /></div><br>
+        
+        <div class='itemWinnerCup'><div class="fontShare resizeFont" style="margin-top: -10px; margin-bottom: 30px;"
+        data-fontSize="30" data-lineHeight="30">{{session.user}}</div><img src="/assets/item_cup.png" /></div><br>
         <div id='resultScore' class="fontResultScore fontScore resizeFont" data-fontSize="50" data-lineHeight="50">Điểm: {{session.score}}</div><br>
         <div id='result' class="fontResultScore fontScore resizeFont" data-fontSize="50" data-lineHeight="50">
             <div class="right">Đúng {{session.right}}</div>
@@ -32,14 +34,6 @@
                 <li id="buttonReplay" class="buttonClick fitImg" onclick="goHome()"><img alt="Replay" src="/assets/button_replay.png" /></li>
                 <li id="buttonSave" class="buttonClick fitImg"><img alt="Replay" src="/assets/button_save.png" /></li>
                 <li id="buttonScore" class="buttonClick fitImg"><img alt="Replay" src="/assets/button_score.png" /></li>
-            </ul>
-        </div>
-        <div id="shareOption" class="share">
-            <div class="fontShare resizeFont" data-fontSize="30" data-lineHeight="30">Share you score</div>
-            <ul>
-                <li id="buttonFacebook" class="buttonClick fitImg"><img alt="Facebook" src="/assets/button_facebook.png" /></li>
-                <li id="buttonTwitter" class="buttonClick fitImg"><img alt="Twitter" src="/assets/button_twitter.png" /></li>
-                <li id="buttonGoogle" class="buttonClick fitImg"><img alt="Google" src="/assets/button_google.png" /></li>
             </ul>
         </div>
     </div>

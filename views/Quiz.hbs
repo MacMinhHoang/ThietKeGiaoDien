@@ -26,11 +26,13 @@
 
 		/*document on ready*/
 		/*set up count-down time*/
-		let count = $('#time').val()?$('#time').val():60
+		let isN = $('#isNeg').val()
+		if(isN===true) $('#cancelForm').submit()
+		let count = $('#time').val()?$('#time').val():5
 		let timer = setInterval(function() {
 
 		    $(".gameTimerStatus").text(count--)
-		    if(count <= 0) {
+		    if(count <= 0 || score<0) {
 		    	clearInterval(timer);
 		    	$('#cancelForm').submit()
 		    }
@@ -55,7 +57,6 @@
 	 	$('.answer').click(function(){
 			
 			clearInterval(timer);
-			new sound('/OLD/sound/correct1.mp3').play()
 			const chosen = $(this).data('id')
 			$('#chosen').val(chosen);
 			$('#time').val(count);
@@ -71,13 +72,14 @@
 	<input type="hidden" value="{{session.wrong}}" id="wrong" name="wrong">
 	<input type="hidden" value="{{session.curChosen}}" id="chosen" name="chosen">
 	<input type="hidden" value="{{session.isRight}}" id="isRight" >
+	<input type="hidden" value="{{session.isNeg}}" id="isNeg" >
 </form>
 <form id="nextForm" method="POST" action="/quiz/next"></form>
 <form id="cancelForm" method="POST" action="/quiz/cancel"></form>
 <div id="gameHolder">
     <div id="gameStatus" class="fitImg">
         <div class="gameTotal fontStatus">
-            <div class="gameQuestionStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 21px; line-height: 21px;">{{session.questionID}}</div><img class="soundOn" alt="Begin" src="assets/item_question.png">
+            <div class="gameQuestionStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 21px; line-height: 21px;">{{session.score}}</div><img class="soundOn" alt="Begin" src="assets/item_question.png">
         </div>
         <div class="gameTimer fontStatus">
             <div class="gameTimerStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 21px; line-height: 21px;"></div><img class="soundOn" alt="Begin" src="assets/item_timer.png">
