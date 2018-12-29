@@ -26,13 +26,11 @@
 
 		/*document on ready*/
 		/*set up count-down time*/
-		let isN = $('#isNeg').val()
-		if(isN===true) $('#cancelForm').submit()
-		let count = $('#time').val()?$('#time').val():5
+		let count = $('#time').val()?$('#time').val():60
 		let timer = setInterval(function() {
 
 		    $(".gameTimerStatus").text(count--)
-		    if(count <= 0 || score<0) {
+		    if(count <= 0) {
 		    	clearInterval(timer);
 		    	$('#cancelForm').submit()
 		    }
@@ -72,7 +70,6 @@
 	<input type="hidden" value="{{session.wrong}}" id="wrong" name="wrong">
 	<input type="hidden" value="{{session.curChosen}}" id="chosen" name="chosen">
 	<input type="hidden" value="{{session.isRight}}" id="isRight" >
-	<input type="hidden" value="{{session.isNeg}}" id="isNeg" >
 </form>
 <form id="nextForm" method="POST" action="/quiz/next"></form>
 <form id="cancelForm" method="POST" action="/quiz/cancel"></form>

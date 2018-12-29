@@ -8,15 +8,23 @@
 
 {{#section 'js'}}
 	<script type="text/javascript">
-		$('#buttonNextQues').click(function(){
 			
-			$('#nextForm').submit()
+		$('#buttonNextQues').click(function(){
+			const isN = $('#isN').val()
+			console.log(isN)
+			if(isN=="true") {
+				$('#cancelForm').submit()
+			}
+			else $('#nextForm').submit()
 		})
 
 	</script>
 {{/section}}
 
-<form id="nextForm" method="POST" action="/quiz/next"></form>
+<input type="hidden" value="{{isNeg}}" id="isN" >
+<form id="nextForm" method="POST" action="/quiz/next">
+</form>
+<form id="cancelForm" method="POST" action="/quiz/cancel"></form>
 
 <div id="gameHolder" style="display: block; opacity: 1;"> 
 	<div id="gameStatus" class="fitImg"> 
