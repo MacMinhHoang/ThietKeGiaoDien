@@ -17,6 +17,12 @@
 {{#section 'js'}}
     <script type="text/javascript">
         $('.categoryThumb').click(function() {
+            var timer = setInterval(function() {
+                    swal({
+                        type: 'success',
+                        title: 'Đợi trong giây lát...'
+                    })
+                }, 3000);
             $('#chosenMode').val($(this).data('id'));
             $('#formMode').submit();
         })

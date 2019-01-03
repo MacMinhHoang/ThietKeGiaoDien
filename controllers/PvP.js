@@ -113,7 +113,7 @@ router.post('/', (req, res) => {
 	req.session.enemyscore = enemyscore? parseInt(enemyscore) + 5: 5
 
 	
-	if(req.session.questionID > 10){
+	if(req.session.questionID > 5){
 		isNeg = true
 	}
 	req.session.time = time
