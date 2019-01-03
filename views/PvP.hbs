@@ -26,13 +26,17 @@
 
 		/*document on ready*/
 		/*set up count-down time*/
-		let count = $('#time').val()?$('#time').val():60
+		let count = $('#time').val()?$('#time').val():10
 		let timer = setInterval(function() {
 
 		    $(".gameTimerStatus").text(count--)
 		    if(count <= 0) {
-		    	clearInterval(timer);
-		    	$('#cancelForm').submit()
+		    	count = 10;
+				clearInterval(timer);
+				const chosen = null
+				$('#chosen').val(chosen);
+				$('#time').val(count);
+				$('#myForm').submit()
 		    }
 		}, 1000);
 
@@ -53,7 +57,7 @@
 
 		/*when player chooses an option*/
 	 	$('.answer').click(function(){
-			
+			count = 10;
 			clearInterval(timer);
 			const chosen = $(this).data('id')
 			$('#chosen').val(chosen);
@@ -66,6 +70,7 @@
 <form id="myForm" method="POST">
 	<input type="hidden" value="{{session.time}}" id="time" name="time">
 	<input type="hidden" value="{{session.score}}" id="score" name="score">
+	<input type="hidden" value="{{session.enemyscore}}" id="enemyscore" name="enemyscore">
 	<input type="hidden" value="{{session.right}}" id="right" name="right">
 	<input type="hidden" value="{{session.wrong}}" id="wrong" name="wrong">
 	<input type="hidden" value="{{session.curChosen}}" id="chosen" name="chosen">
@@ -77,6 +82,9 @@
     <div id="gameStatus" class="fitImg">
         <div class="gameTotal fontStatus">
             <div class="gameQuestionStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 21px; line-height: 21px;">{{session.score}}</div><img class="soundOn" alt="Begin" src="assets/item_question.png">
+        </div>
+		<div class="gameTotalEnemy fontStatus ">
+            <div class="gameEnemyQuestionStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 21px; line-height: 21px;">{{session.enemyscore}}</div><img class="soundOn" alt="Begin" src="assets/item_question.png">
         </div>
         <div class="gameTimer fontStatus">
             <div class="gameTimerStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 21px; line-height: 21px;"></div><img class="soundOn" alt="Begin" src="assets/item_timer.png">

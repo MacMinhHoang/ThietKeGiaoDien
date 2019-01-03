@@ -16,7 +16,7 @@ router.get('/quiz', restrict, (req, res) => {
 router.get('/pvp', restrict, (req, res) => {
     var vm = {
         session: req.session,
-        rank: 20,
+        rank: 10,
     }
 
     res.render('resultPvP', vm);
