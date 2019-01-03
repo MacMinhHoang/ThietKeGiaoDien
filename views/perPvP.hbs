@@ -1,0 +1,55 @@
+{{#section 'css'}}
+    <style>
+        #gameHolder {
+            display: block !important;
+        }
+    </style>
+{{/section}}
+
+{{#section 'js'}}
+	<script type="text/javascript">
+			
+		$('#buttonNextQues').click(function(){
+			const isN = $('#isN').val()
+			console.log(isN)
+			if(isN=="true") {
+				$('#cancelForm').submit()
+			}
+			else $('#nextForm').submit()
+		})
+
+	</script>
+{{/section}}
+
+<input type="hidden" value="{{isNeg}}" id="isN" >
+<form id="nextForm" method="POST" action="/pvp/next">
+</form>
+<form id="cancelForm" method="POST" action="/pvp/cancel"></form>
+
+<div id="gameHolder" style="display: block; opacity: 1;"> 
+	<div id="gameStatus" class="fitImg"> 
+		<div class="gameTotal fontStatus"> 
+			<div class="gameQuestionStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 20px; line-height: 20px;">{{session.score}}</div>
+			<img class="soundOn" alt="Begin" src="/assets/item_question.png"> 
+		</div>
+		<div class="gameTimer fontStatus"> 
+			<div class="gameTimerStatus resizeFont" data-fontsize="30" data-lineheight="30" style="font-size: 20px; line-height: 20px;">{{session.time}}</div>
+			<img class="soundOn" alt="Begin" src="/assets/item_timer.png"> 
+		</div>
+	</div>
+	<div id="questionResultHolder" style="display: block; opacity: 1;"> 
+		<div id="explanationHolder">
+			{{#if session.even}}
+			<div class="explanation fontExplanation resizeFont" data-fontsize="35" data-lineheight="35" style="font-size: 23px; line-height: 23px; color: rgb(204, 204, 204); text-align: center; top: 25%; left: 5%; width: 90%; height: 10%;">Bắc Băng Dương (Arctic Ocean) là đại dương nhỏ nhất trong năm đại dương của Trái Đất, bao quanh cực Bắc. Nơi đây băng tuyết bao phủ hoàn toàn vào mùa đông và một phần quanh năm. Có diện tích 14.090.000 km² và có độ sâu trung bình 1.038 mét.</div>{{else}}
+			<div class="explanation fontExplanation resizeFont" data-fontsize="35" data-lineheight="35" style="font-size: 23px; line-height: 23px; color: rgb(204, 204, 204); text-align: center; top: 25%; left: 5%; width: 90%; height: 10%;">Voi là động vật</div>{{/if}}
+		</div>
+		{{#if session.isRight}}
+		<div data-fontsize="50" data-lineheight="50" style="font-size: 50px; margin-top: 10%; line-height: 50px; color: rgb(255, 255, 255); text-align: center; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">That's Correct</div>
+		{{else}}
+		<div data-fontsize="50" data-lineheight="50" style="font-size: 50px; margin-top: 10%; line-height: 50px; color: rgb(255, 255, 255); text-align: center; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><div id="incorrect">Incorrect!</div></div>
+		{{/if}}
+		<div id="buttonNextQues" style="left: 48%" class="nextImg fontCorrectWrong buttonClick fitImg"><img src="assets/button_next.png"></div>
+	</div>
+</div>
+
+

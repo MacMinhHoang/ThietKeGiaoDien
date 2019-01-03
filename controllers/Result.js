@@ -15,11 +15,10 @@ router.get('/quiz', restrict, (req, res) => {
 
 router.get('/pvp', restrict, (req, res) => {
     var vm = {
-        winner: req.session.score > req.session.opponentScore
+        session: req.session,
+        rank: 20,
     }
-    req.session.opponentScore = null
-    req.session.opponentRight = null
-    req.session.opponentWrong = null
+
     res.render('resultPvP', vm);
 });
 
