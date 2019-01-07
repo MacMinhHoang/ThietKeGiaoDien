@@ -114,14 +114,13 @@ router.post('/', (req, res) => {
 	
 	if(req.session.questionID > 5){
 		if (req.session.questionID)
-        req.session.questionID = null
+        	req.session.questionID = null
 		req.session.time = 10
 		res.redirect('/result/pvp')
 	}
 	req.session.time = time
 	req.session.isRight = ""
 	req.session.curChosen = ""
-	req.session.isNeg = isNeg
 	req.session.questionID = req.session.questionID + 1
 	res.redirect('/pvp')
 	// res.render(`PvP`, {session: req.session, isNeg: isNeg})

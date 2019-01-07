@@ -58,13 +58,12 @@
 
 		/*when player chooses an option*/
 	 	$('.answer').click(function(){
-				count = 10;
-				clearInterval(timer);
-				const chosen = $(this).data('id')
-				$('#chosen').val(chosen);
-				$('#time').val(count);
-				$('#myForm').submit()
-			}
+			count = 10;
+			clearInterval(timer);
+			const chosen = $(this).data('id')
+			$('#chosen').val(chosen);
+			$('#time').val(count);
+			$('#myForm').submit()
 		})
 	</script>
 {{/section}}
