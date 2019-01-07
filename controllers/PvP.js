@@ -92,9 +92,8 @@ router.get('/', restrict, (req, res) => {
 
 router.post('/', (req, res) => {
 	const { id, chosen } = req.body
-	let { score, enemyscore , time, right, wrong } = req.body
+	let { isNeg, score, enemyscore , time, right, wrong } = req.body
 	const answer = req.session.curQuiz.result
-	let isNeg = false
 	
 	if(chosen === answer){
 		req.session.right = right? parseInt(right) + 1: 1
@@ -114,20 +113,27 @@ router.post('/', (req, res) => {
 
 	
 	if(req.session.questionID > 5){
-		isNeg = true
+		if (req.session.questionID)
+        req.session.questionID = null
+		req.session.time = 10
+		res.redirect('/result/pvp')
 	}
 	req.session.time = time
-	req.session.curChosen = chosen
-	res.render(`perPvP`, {session: req.session, isNeg: isNeg})
-})
-
-router.post('/next', (req, res) => {
 	req.session.isRight = ""
 	req.session.curChosen = ""
-	console.log(req.session.questionID)
+	req.session.isNeg = isNeg
 	req.session.questionID = req.session.questionID + 1
 	res.redirect('/pvp')
+	// res.render(`PvP`, {session: req.session, isNeg: isNeg})
 })
+
+// router.post('/next', (req, res) => {
+// 	req.session.isRight = ""
+// 	req.session.curChosen = ""
+// 	console.log(req.session.questionID)
+// 	req.session.questionID = req.session.questionID + 1
+// 	res.redirect('/pvp')
+// })
 
 router.post('/cancel', (req, res) => {
 	if (req.session.questionID)

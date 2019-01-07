@@ -26,6 +26,7 @@
 
 		/*document on ready*/
 		/*set up count-down time*/
+		let order = $('#order').val()?$('#order').val():1
 		let count = $('#time').val()?$('#time').val():10
 		let timer = setInterval(function() {
 
@@ -57,12 +58,13 @@
 
 		/*when player chooses an option*/
 	 	$('.answer').click(function(){
-			count = 10;
-			clearInterval(timer);
-			const chosen = $(this).data('id')
-			$('#chosen').val(chosen);
-			$('#time').val(count);
-			$('#myForm').submit()
+				count = 10;
+				clearInterval(timer);
+				const chosen = $(this).data('id')
+				$('#chosen').val(chosen);
+				$('#time').val(count);
+				$('#myForm').submit()
+			}
 		})
 	</script>
 {{/section}}
@@ -76,8 +78,6 @@
 	<input type="hidden" value="{{session.curChosen}}" id="chosen" name="chosen">
 	<input type="hidden" value="{{session.isRight}}" id="isRight" >
 </form>
-<form id="nextForm" method="POST" action="/pvp/next"></form>
-<form id="cancelForm" method="POST" action="/pvp/cancel"></form>
 <div id="gameHolder">
     <div id="gameStatus" class="fitImg">
         <div class="gameTotal fontStatus">
