@@ -36,7 +36,9 @@
                 <div id="button" class="buttonClick buttonIcon buttonExit" onclick="goHome()"><img alt="Begin" src="/assets/button_exit.png" /></div>
             </div>
         </div>
-        
+
+        <form id="cancelForm" method="POST" action="/pvp/cancel"></form>
+
         <div id="confirmHolder" class="overlayBg">
             <div class="confirmContent">
                 <div class="message fontMessage resizeFont ignorePadding" data-fontSize="30" data-lineHeight="30">Are
@@ -129,7 +131,8 @@
         }; 
         window.addEventListener("click", resumeAudioContext);
         function goHome() {
-            window.location = '/home';
+            $('#cancelForm').submit()
+            
         }
     </script>
     <script src="/js/cross/cross.js" data-banner='true' data-link='https://codecanyon.net/item/quiz-game-2-html5-game/20593574'></script>
