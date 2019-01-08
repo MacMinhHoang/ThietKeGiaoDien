@@ -31,6 +31,7 @@ router.get('/PlayMode', restrict, (req, res) => {
 });
 
 router.post('/PlayMode', (req, res) => {
+    req.session.mode = req.body.playmode;
     if (req.body.playmode === "Solo")
         res.redirect('/quiz');
     else res.redirect('/pvp');

@@ -95,8 +95,21 @@ router.post('/next', (req, res) => {
 router.post('/cancel', (req, res) => {
 	if (req.session.questionID)
         req.session.questionID = null
-    req.session.time = 60
-	res.redirect('/result/quiz')
+	req.session.time = 60
+	var mode = req.session.mode;
+	if(mode == null)
+	{
+		req.session.user = null;
+		res.redirect('/start');
+	}
+	else
+	{
+		req.session.mode = null;
+		if (mode == "Solo")
+			res.redirect('/result/quiz');
+		else res.redirect('/result/pvp');
+	}
+	
 })
 
 module.exports = router;

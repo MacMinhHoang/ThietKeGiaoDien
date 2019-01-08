@@ -8,8 +8,14 @@
 
 {{#section 'js'}}
     <script type="text/javascript">
+        var isDisabled = true
+        $('#nickname').on('input', function() {
+            $('#myIMg').css('opacity', 1);
+            isDisabled = false;
+        })
         $('#MyBtnStart').click(function() {
-            $('#MyBtnSubmit').click()
+            if (!isDisabled)
+                $('#MyBtnSubmit').click()
         })
     </script>
 {{/section}}
@@ -24,11 +30,13 @@
         <br><br>
         <div class="preloadText fontPreload resizeFont"></div>
         <form method="POST" id="formNickname">
-            <input type="text" name="nickname" class="form-control" required="required" 
+            <input type="text" name="nickname" id="nickname" class="form-control" required="required" 
                 placeholder="Nhập nickname của bạn"/>  
             <input type="submit" style="display:none;" id="MyBtnSubmit">
         </form>
         <br>
-        <div id="MyBtnStart" class="startImg buttonClick"><img src="/assets/button_start.png" /></div>
+        <div id="MyBtnStart" class="startImg buttonClick">
+            <img id="myIMg" src="/assets/button_start.png" style="opacity: 0.5"/>
+        </div>
     </div>
 </div>

@@ -112,7 +112,7 @@ router.post('/', (req, res) => {
 	req.session.enemyscore = enemyscore? parseInt(enemyscore) + 5: 5
 
 	
-	if(req.session.questionID > 5){
+	if(req.session.questionID >= 5){
 		if (req.session.questionID)
         	req.session.questionID = null
 		req.session.time = 10
@@ -137,8 +137,21 @@ router.post('/', (req, res) => {
 router.post('/cancel', (req, res) => {
 	if (req.session.questionID)
         req.session.questionID = null
-    req.session.time = 10
-	res.redirect('/result/pvp')
+	req.session.time = 10
+	var mode = req.session.mode;
+	if(mode == null)
+	{
+		req.session.user = null;
+		res.redirect('/start');
+	}
+	else
+	{
+		req.session.mode = null;
+		if (mode == "Solo")
+			res.redirect('/result/quiz');
+		else res.redirect('/result/pvp');
+	}
+	
 })
 
 // router.post('/next', (req, res) => {
